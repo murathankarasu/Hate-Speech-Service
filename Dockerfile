@@ -14,14 +14,14 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt gdown
 
 # Uygulama kodunu kopyala
-COPY app/ ./app/
+COPY src/ ./src/
 
-# Model indirme scriptini kopyala
+# Model dosyalarını indirmek için script oluştur
 COPY download_models.sh .
 RUN chmod +x download_models.sh
 
 # Port'u aç
-EXPOSE 10000
+EXPOSE 10001
 
 # Model dosyalarını indir ve uygulamayı çalıştır
 CMD ["./download_models.sh"] 
