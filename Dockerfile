@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 
-WORKDIR /app
+WORKDIR /app/hate_speech_api
 
 # Gerekli sistem paketlerini yükle
 RUN apt-get update && apt-get install -y \
@@ -14,14 +14,15 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt gdown
 
 # Uygulama kodunu kopyala
-COPY src/ ./src/
+COPY app/ ./app/
 
-# Model dosyalarını indirmek için script oluştur
+# Model indirme scriptini kopyala
 COPY download_models.sh .
 RUN chmod +x download_models.sh
 
 # Port'u aç
-EXPOSE 10001
+ENV PORT=10000
+EXPOSE 10000
 
 # Model dosyalarını indir ve uygulamayı çalıştır
 CMD ["./download_models.sh"] 
