@@ -6,13 +6,16 @@ import os
 import traceback
 from model_handler import ModelHandler
 
-# Loglama ayarları
+# Log klasörünü oluştur
+os.makedirs('app/logs', exist_ok=True)
+
+# Logging ayarları
 logging.basicConfig(
-    level=logging.DEBUG,  # DEBUG seviyesine çektik
-    format='[%(asctime)s] %(levelname)s: %(message)s',
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('logs/api.log'),
-        logging.StreamHandler()  # Konsola da log çıktısı ekledik
+        logging.FileHandler('app/logs/api.log'),
+        logging.StreamHandler()
     ]
 )
 
@@ -106,6 +109,5 @@ def get_categories():
         }), 500
 
 if __name__ == '__main__':
-    # Logs klasörünü oluştur
-    os.makedirs('logs', exist_ok=True)
-    app.run(host='0.0.0.0', port=10000, debug=True)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port, debug=True)
