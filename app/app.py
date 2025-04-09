@@ -108,4 +108,4 @@ def get_categories():
 if __name__ == '__main__':
     # Logs klasörünü oluştur
     os.makedirs('logs', exist_ok=True)
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=10000, debug=True)
